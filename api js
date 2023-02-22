@@ -1,0 +1,22 @@
+let isSubmit = document.getElementById("button");
+isSubmit.addEventListener("click",submitFunc);
+let container =  document.querySelector(".container");
+
+
+function submitFunc(){
+    let usersearch = document.getElementById("search").value;
+    
+    console.log(usersearch);
+URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${usersearch}`;
+fetch(URL)
+.then((response) => response.json())
+.then(data =>{
+  
+    for(let i=0; i < data.meals.length; i++){
+        container.innerHTML += `<div class='child_div'><h2>the meal is ${data.meals[i].strMeal}</h2>
+        <img id='foodimg' src='${data.meals[i].strMealThumb}'></img></div>
+        `;
+    }
+}
+);
+}
